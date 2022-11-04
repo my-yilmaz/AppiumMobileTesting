@@ -23,7 +23,6 @@ public class Appium05 {
         capabilities.setCapability("noReset", "true");
 
         AndroidDriver<MobileElement> driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-//asadidaki kod tel kilitli ise acmamizi sagliyor
 
         if (driver.isDeviceLocked()) {
             driver.unlockDevice();
