@@ -11,16 +11,16 @@ import java.net.URL;
 public class Appium01 {
     @Test
     public void test001() throws InterruptedException, MalformedURLException {
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+        DesiredCapabilities capabilities = new DesiredCapabilities();
 
-        desiredCapabilities.setCapability("platformName", "Android");
-        desiredCapabilities.setCapability("platformVersion", "10.0");
-        desiredCapabilities.setCapability("deviceName", "Pixel_2");
-        desiredCapabilities.setCapability("automationName", "UiAutomator2");
-        //  desiredCapabilities.setCapability("app", "C:\\Users\\mrs\\IdeaProjects\\AppiumMobile\\Apps\\apiDemos.apk");
-        desiredCapabilities.setCapability("appPackage", "com.touchboarder.android.api.demos");
-        desiredCapabilities.setCapability("appActivity", "com.touchboarder.androidapidemos.MainActivity");
-        AndroidDriver<AndroidElement> driver = new AndroidDriver<AndroidElement>(new URL("http:localhost:4723/wd/hub"), desiredCapabilities);
+        capabilities.setCapability("platformName", "Android");
+        capabilities.setCapability("platformVersion", "10.0");
+        capabilities.setCapability("deviceName", "Pixel_2");
+        capabilities.setCapability("automationName", "UiAutomator2");
+        capabilities.setCapability("app", "C:\\Users\\my\\IdeaProjects\\AppiumMobileTesting\\Apps\\apiDemos.apk");
+        capabilities.setCapability("appPackage", "com.touchboarder.android.api.demos");
+        capabilities.setCapability("appActivity", "com.touchboarder.androidapidemos.MainActivity");
+        AndroidDriver<AndroidElement> driver = new AndroidDriver<>(new URL("http:localhost:4723/wd/hub"), capabilities);
         Thread.sleep(5000);
     }
 }

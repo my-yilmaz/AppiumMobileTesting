@@ -19,7 +19,7 @@ public class Appium05 {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.0");
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "RealDevice");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        capabilities.setCapability(MobileCapabilityType.APP, "C:\\Users\\mrs\\IdeaProjects\\AppiumMobile\\Apps\\Calculator.apk");
+        capabilities.setCapability(MobileCapabilityType.APP, "C:\\Users\\my\\IdeaProjects\\AppiumMobileTesting\\Apps\\Calculator.apk");
         capabilities.setCapability("noReset", "true");
 
         AndroidDriver<MobileElement> driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
@@ -50,11 +50,11 @@ public class Appium05 {
 
         MobileElement equal = driver.findElementByAccessibilityId("equals");
 
-        //64+71
-        num6.click();
+        //42+21
         num4.click();
+        num2.click();
         plus.click();
-        num7.click();
+        num2.click();
         num1.click();
 
         Thread.sleep(3000);

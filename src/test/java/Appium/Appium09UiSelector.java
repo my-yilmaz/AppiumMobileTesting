@@ -1,6 +1,5 @@
 package Appium;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -12,34 +11,35 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Appium02 {
+public class Appium09UiSelector {
     @Test
     public void test() throws MalformedURLException, InterruptedException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.0");
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "RealDevice");
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel_2");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
         capabilities.setCapability(MobileCapabilityType.APP, "C:\\Users\\my\\IdeaProjects\\AppiumMobileTesting\\Apps\\gestureTool.apk");
         capabilities.setCapability("appPackage", "com.davemac327.gesture.tool");
         capabilities.setCapability("appActivity", "com.davemac327.gesture.tool.GestureBuilderActivity");
-
+        capabilities.setCapability(MobileCapabilityType.NO_RESET, true);
         AndroidDriver<AndroidElement> driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        Thread.sleep(4000);
+        //resourceId ile
+        driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\"com.davemac327.gesture.tool:id/addButton\")").click();
+        //indexle
+        //driver.findElementByAndroidUIAutomator("UiSelector().className(\"android.widget.Button\").index(0)").click();
+        //driver.findElementByAndroidUIAutomator("UiSelector().className(\"android.widget.Button\").text(\"Test\")").click();
+        driver.findElementByAndroidUIAutomator("UiSelector().className(\"android.widget.Button\").textStartsWith(\"Add\")").click();
 
-        System.out.println("app yuklendi");
-        Thread.sleep(3000);
-        driver.findElementById("com.android.permissioncontroller:id/continue_button").click();
         Thread.sleep(5000);
-        MobileElement okButton = driver.findElementByXPath("//android.widget.Button[@text='OK']");
-        okButton.click();
-        System.out.println("izinler onaylandi");
+
+        System.out.println(driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\"com.davemac327.gesture.tool:id/done\").enabled(false)").getAttribute("enabled"));
 
 
-        MobileElement homeScreenTitle = driver.findElementById("android:id/title");
-        Assert.assertTrue(homeScreenTitle.isDisplayed());
-        System.out.println("Ana sayfa acildi");
+        //session kapat
 
-
+//        driver.closeApp();
     }
 }
