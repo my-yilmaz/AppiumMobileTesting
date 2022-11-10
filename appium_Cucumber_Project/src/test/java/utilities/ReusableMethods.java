@@ -2,6 +2,7 @@ package utilities;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public class ReusableMethods {
 
     public static void tapOnElementWithText(String text) {
-        List<MobileElement> mobileElementList = Driver.getAppiumDriver().findElementsByClassName("android.widget.TextView");
+        List<MobileElement> mobileElementList = Driver.getAppiumDriver().findElements(By.className("android.widget.TextView"));
         for (MobileElement page: mobileElementList) {
             if (page.getText().equals(text)){
                 page.click();

@@ -6,8 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="AppiumTest" />
         <module name="AppiumMobileTest" />
+        <module name="AppiumTest" />
+        <module name="Appium_TestNG_Project" />
+        <module name="Appium_Project" />
       </profile>
     </annotationProcessing>
   </component>

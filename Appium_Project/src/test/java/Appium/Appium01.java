@@ -17,7 +17,7 @@ public class Appium01 {
         capabilities.setCapability("platformVersion", "10.0");
         capabilities.setCapability("deviceName", "Pixel_2");
         capabilities.setCapability("automationName", "UiAutomator2");
-        capabilities.setCapability("app", "C:\\Users\\my\\IdeaProjects\\AppiumMobileTesting\\Apps\\apiDemos.apk");
+        capabilities.setCapability("app", "C:\\Users\\my\\IdeaProjects\\AppiumMobileTesting\\Appium_TestNG_Project\\Apps\\apiDemos.apk");
         capabilities.setCapability("appPackage", "com.touchboarder.android.api.demos");
         capabilities.setCapability("appActivity", "com.touchboarder.androidapidemos.MainActivity");
         AndroidDriver<AndroidElement> driver = new AndroidDriver<>(new URL("http:localhost:4723/wd/hub"), capabilities);

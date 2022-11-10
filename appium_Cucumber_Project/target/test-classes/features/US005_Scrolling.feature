@@ -1,3 +1,4 @@
+@test05
 Feature: API demos Scroll
 
   Background:  scroll

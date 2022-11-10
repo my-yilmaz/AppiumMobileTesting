@@ -30,7 +30,7 @@ public class ApiDemosSteps extends ReusableMethods {
 
     @Then("kullanici API Demos ekraninda")
     public void kullanici_api_demos_ekraninda() {
-        Assert.assertEquals("API Demos", screens.apiDemosPage().apiDemosTitle.getText());
+        ReusableMethods.isElementPresent("API Demos");
 
     }
 

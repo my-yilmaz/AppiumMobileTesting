@@ -17,7 +17,7 @@ public class AppiumBase {
         capabilities.setCapability("platformVersion", "10.0");
         capabilities.setCapability("deviceName", "Pixel_2");
         capabilities.setCapability("automationName", "UiAutomator2");
-        capabilities.setCapability("app", "C:\\Users\\my\\IdeaProjects\\AppiumMobileTesting\\Apps\\apiDemos.apk");
+        capabilities.setCapability("app", "C:\\Users\\my\\IdeaProjects\\AppiumMobileTesting\\Appium_Project\\Apps\\apiDemos.apk");
        // capabilities.setCapability("appPackage", "com.touchboarder.android.api.demos");
        // capabilities.setCapability("appActivity", "com.touchboarder.androidapidemos.MainActivity");
         capabilities.setCapability(MobileCapabilityType.NO_RESET, true);
