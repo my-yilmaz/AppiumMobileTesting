@@ -1,7 +1,7 @@
 @test05
 Feature: API demos Scroll
 
-  Background:  scroll
+  Background: scroll
     Given App yuklensin
     When kullanici ana ekranda
     And kullanici API Demos butununa tikladi

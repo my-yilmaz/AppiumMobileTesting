@@ -1,7 +1,9 @@
 package utilities;
 
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.touch.offset.ElementOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,10 +15,10 @@ public class ReusableMethods {
 
     public static void tapOnElementWithText(String text) {
         List<MobileElement> mobileElementList = Driver.getAppiumDriver().findElements(By.className("android.widget.TextView"));
-        for (MobileElement page: mobileElementList) {
-            if (page.getText().equals(text)){
+        for (MobileElement page : mobileElementList) {
+            if (page.getText().equals(text)) {
                 page.click();
-            }else{
+            } else {
                 scrollWithUiScrollable(text);
             }
             break;
@@ -26,10 +28,10 @@ public class ReusableMethods {
     //ikinci alternatif bir method
     public static void clickOnElementWithText(String elementText) throws InterruptedException {
         Thread.sleep(4000);
-        List<MobileElement> mobileElementList = Driver.getAppiumDriver().findElementsByXPath("//android.widget.TextView[@text='"+elementText+"']");
-        if (mobileElementList.size()>0){
+        List<MobileElement> mobileElementList = Driver.getAppiumDriver().findElementsByXPath("//android.widget.TextView[@text='" + elementText + "']");
+        if (mobileElementList.size() > 0) {
             mobileElementList.get(0).click();
-        }else scrollWithUiScrollable(elementText);
+        } else scrollWithUiScrollable(elementText);
     }
 
 
@@ -94,8 +96,13 @@ public class ReusableMethods {
 
     public static void scrollWithUiScrollable(String elementText) {
         AndroidDriver<MobileElement> driver = (AndroidDriver) Driver.getAppiumDriver();
-        driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\""+elementText+"\"))");
+        driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"" + elementText + "\"))");
         tapOn(driver.findElementByXPath("//android.widget.TextView[@text='" + elementText + "']"));
+    }
+
+    public static void longPressOnElement(MobileElement element) {
+        TouchAction action = new TouchAction<>(Driver.getAppiumDriver());
+        action.longPress(ElementOption.element(element)).release().perform();
     }
 
     public static void scrollDownToBeVisible(MobileElement element) {

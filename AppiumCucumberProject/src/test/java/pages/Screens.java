@@ -15,6 +15,8 @@ public class Screens {
     private DragAndDropPage dragAndDropPage;
     private DateWidgetsPage dateWidgetsPage;
     private PopupMenuPage popupMenuPage;
+    private ExpandableListPage expandableListPage;
+    private SpinnerPages spinnerPages;
 
     public ApiDemosPage apiDemosPage() {
         if (apiDemosPage == null) {
@@ -77,5 +79,19 @@ public class Screens {
             viewPage = new ViewPage();
         }
         return viewPage;
+    }
+
+    public ExpandableListPage expandableListPage() {
+        if (expandableListPage == null) {
+            expandableListPage = new ExpandableListPage();
+        }
+        return expandableListPage;
+    }
+
+    public SpinnerPages spinnerPages() {
+        if (spinnerPages == null) {
+            spinnerPages = new SpinnerPages();
+        }
+        return spinnerPages;
     }
 }

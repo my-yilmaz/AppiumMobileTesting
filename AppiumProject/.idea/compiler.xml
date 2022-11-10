@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="AppiumMobileTest" />
+        <module name="AppiumProject" />
         <module name="AppiumTest" />
         <module name="Appium_TestNG_Project" />
         <module name="Appium_Project" />

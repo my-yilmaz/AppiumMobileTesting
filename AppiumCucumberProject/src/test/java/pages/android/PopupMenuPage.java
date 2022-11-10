@@ -10,7 +10,7 @@ public class PopupMenuPage {
         PageFactory.initElements(new AppiumFieldDecorator(Driver.getAppiumDriver()),this);
     }
 
-    @AndroidFindBy(className = "android.widget.Button")
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='MAKE A POPUP!']")
     public MobileElement makePopupButton;
 
     @AndroidFindBy(xpath = "//android.widget.Toast")
