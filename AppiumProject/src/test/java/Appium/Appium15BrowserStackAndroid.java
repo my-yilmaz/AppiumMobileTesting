@@ -16,11 +16,11 @@ public class Appium15BrowserStackAndroid {
         DesiredCapabilities caps = new DesiredCapabilities();
 
         // Set your access credentials
-        caps.setCapability("browserstack.user", "muhammedyilmaz_z2ESQg");
-        caps.setCapability("browserstack.key", "3bkUAidAmV76PRQ3evFD");
+        caps.setCapability("browserstack.user", "maviblues_gM3yqK");
+        caps.setCapability("browserstack.key", "UQ9mXQqzBJBYG8q5162H");
 
         // Set URL of the application under test
-        caps.setCapability("app", "bs://b0cf091269b79292215b9c0e19924cc84ad14491");
+        caps.setCapability("app", "bs://fdffc9ab8f46f6e4a1184d1912a599970f94743c");
 
         // Specify device and os_version for testing
         caps.setCapability("device", "Samsung Galaxy Note 20");

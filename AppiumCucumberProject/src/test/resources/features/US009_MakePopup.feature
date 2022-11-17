@@ -11,4 +11,5 @@ Feature: Make a Popup
     Then panelin ciktigini dogrulasin
     And kullanici "Add" butununa tikladi
     Then Toast mesajda Add gectigini dogrular
+    And kullanici app kapatsin
 

@@ -16,11 +16,11 @@ public class Appium16BrowserStackIOS {
         DesiredCapabilities caps = new DesiredCapabilities();
 
         // Set your access credentials
-        caps.setCapability("browserstack.user", "muhammedyilmaz_z2ESQg");
-        caps.setCapability("browserstack.key", "3bkUAidAmV76PRQ3evFD");
+        caps.setCapability("browserstack.user", "maviblues_gM3yqK");
+        caps.setCapability("browserstack.key", "UQ9mXQqzBJBYG8q5162H");
 
         // Set URL of the application under test
-        caps.setCapability("app", "bs://f952ca71cbfd19308742592f3cd4a9b0ffb224c5");
+        caps.setCapability("app", "bs://03b32fa6afd579304aa0b99e1f64347883324e8b");
 
         // Specify device and os_version for testing
         caps.setCapability("device", "iPhone XS");
