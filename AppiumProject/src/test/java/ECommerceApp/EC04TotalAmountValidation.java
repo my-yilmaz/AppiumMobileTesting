@@ -49,7 +49,7 @@ public class EC04TotalAmountValidation {
         //shop butonuna tiklayalim
         driver.findElement(By.id("com.androidsample.generalstore:id/btnLetsShop")).click();
         Thread.sleep(2000);
-        //basrili girildi
+        //basarili giris yapildi
         Assert.assertTrue("sayfa basligi gorundu", driver.findElementById("com.androidsample.generalstore:id/toolbar_title").isDisplayed());
         //birinci urun sec
         driver.findElement(By.xpath("(//android.widget.TextView[@text='ADD TO CART'])[1]")).click();
@@ -74,7 +74,7 @@ public class EC04TotalAmountValidation {
 
         MobileElement firstProductPrice = driver.findElementByXPath("(//android.widget.TextView[@resource-id='com.androidsample.generalstore:id/productPrice'])[1]");
         MobileElement secondProductPrice = driver.findElementByXPath("(//android.widget.TextView[@resource-id='com.androidsample.generalstore:id/productPrice'])[2]");
-
+        //urunlerin fiyat toplamlari
         String firstProduct = firstProductPrice.getText().substring(1);
         String secondProduct = secondProductPrice.getText().substring(1);
         double firstDouble = Double.parseDouble(firstProduct);
@@ -85,12 +85,13 @@ public class EC04TotalAmountValidation {
         String total = String.valueOf(firstDouble + secondDouble);
         System.out.println("iki urunun toplam fiyatı = " + total);
 
+        //spetteki toplam fiyat
         MobileElement totalPrice = driver.findElementById("com.androidsample.generalstore:id/totalAmountLbl");
         String totalActual = totalPrice.getText().substring(1);
 
         String totalPriceDouble = String.valueOf(Double.parseDouble(totalActual));
         System.out.println("Sepetteki iki urunun toplam fiyati = " + totalPriceDouble);
-
+        //iki total fiyatın aynı oldugunu dogrulama
         Assert.assertEquals("iki urunun toplam fiyati ile sepetteki toplam fiyat ayni", totalPriceDouble, total);
         driver.quit();
     }

@@ -49,7 +49,7 @@ public class EC03Shopping {
         //shop butonuna tiklayalim
         driver.findElement(By.id("com.androidsample.generalstore:id/btnLetsShop")).click();
         Thread.sleep(2000);
-        //basrili girildi
+        //basarili giris yapildi
         Assert.assertTrue("sayfa basligi gorundu", driver.findElementById("com.androidsample.generalstore:id/toolbar_title").isDisplayed());
         //birinci urun sec
         driver.findElement(By.xpath("(//android.widget.TextView[@text='ADD TO CART'])[1]")).click();
