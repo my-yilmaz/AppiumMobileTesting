@@ -31,8 +31,8 @@ public class Appium07WebAppChrome {
 
         System.out.println(driver.getContext() + "<====app acildigindaki tur");
         //burda aplikasyonun hangi turleri oldugunu gorem icin getContextHandles() kullaniyoruz.
-        Set<String> butunturler = driver.getContextHandles();
-        for (String tur: butunturler) {
+        Set<String> contextName = driver.getContextHandles();
+        for (String tur: contextName) {
             System.out.println(tur);
             if (tur.contains("WEBVIEW_chrome")) {
                 driver.context(tur);

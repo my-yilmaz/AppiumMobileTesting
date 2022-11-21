@@ -2,7 +2,6 @@ package ECommerceApp;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,7 +11,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class EC02Positive{
+public class EC02Positive {
     /*
      1- Fill the form details and verify Toast error messages displayed appropriately for wrong inputs
      2-Shop the items in the app by scrolling to specific Product and add to cart
@@ -23,7 +22,7 @@ public class EC02Positive{
      (go to google and search “appium” then navigate to NATIVE APP and verify it)
     */
     @Test
-    public void positiveTest() throws MalformedURLException, InterruptedException {
+    public void test01() throws MalformedURLException, InterruptedException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");

@@ -25,7 +25,7 @@ public class EC03Shopping {
      */
 
     @Test
-    public void shoppingTest() throws MalformedURLException, InterruptedException {
+    public void test01() throws MalformedURLException, InterruptedException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");

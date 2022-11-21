@@ -1,18 +1,24 @@
 package ECommerceApp;
 
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.touch.LongPressOptions;
+import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Set;
 
-public class EC05TotalAmountValidationScroll {
+public class EC06WebApp {
     /*
     1- Fill the form details and verify Toast error messages displayed appropriately for wrong inputs
     2- Shop the items in the app by scrolling to specific Product and add to cart
@@ -36,7 +42,7 @@ public class EC05TotalAmountValidationScroll {
 
         AndroidDriver<MobileElement> driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 
-        Thread.sleep(4000);
+        Thread.sleep(5000);
         //ulke secilsin
         driver.findElement(By.id("com.androidsample.generalstore:id/spinnerCountry")).click();
         driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Belgium\"))");
@@ -71,7 +77,7 @@ public class EC05TotalAmountValidationScroll {
 
         //ilk urunun adi Air Jordan 4 Retro
         Assert.assertEquals(driver.findElementByXPath("//android.widget.TextView[@text='Air Jordan 4 Retro']").getText(), "Air Jordan 4 Retro");
-
+        Thread.sleep(2000);
         //ikinci urun adi = Air Jordan 1 Mid SE
         Assert.assertEquals(driver.findElementByXPath("//android.widget.TextView[@text='Jordan Lift Off']").getText(), "Jordan Lift Off");
         Thread.sleep(2000);
@@ -105,7 +111,50 @@ public class EC05TotalAmountValidationScroll {
 
         Assert.assertEquals("iki urunun toplam fiyati ile sepetteki toplam fiyat ayni", totalPriceDouble, total);
 
-        driver.quit();
+        // term of conditons gormek icin long press yapilmali
+     MobileElement checkBox=driver.findElement(By.className("android.widget.CheckBox"));
+     MobileElement termsOfCondButton= driver.findElement(By.id("com.androidsample.generalstore:id/termsButton"));
+     MobileElement visitWebsiteButton= driver.findElement(By.id("com.androidsample.generalstore:id/btnProceed"));
+        TouchAction action=new TouchAction<>(driver);
+        //tab
+        action.tap(TapOptions.tapOptions().withElement(ElementOption.element(checkBox))).perform();
+        // long press
+        action.longPress(LongPressOptions.longPressOptions().withElement(ElementOption.element(termsOfCondButton))).release().perform();
 
+        //popup assert
+        MobileElement popUpTitle= driver.findElement(By.id("com.androidsample.generalstore:id/alertTitle"));
+        MobileElement closeButton= driver.findElement(By.id("android:id/button1"));
+        Assert.assertTrue(popUpTitle.isDisplayed());
+
+        //close button
+        action.tap(TapOptions.tapOptions().withElement(ElementOption.element(closeButton))).perform();
+
+        System.out.println(driver.getContext() + "<====visit website button tap etmeden once");
+        //visit website button
+        Thread.sleep(2000);
+        action.tap(TapOptions.tapOptions().withElement(ElementOption.element(visitWebsiteButton))).perform();
+        Thread.sleep(2000);
+        //burda aplikasyonun hangi turleri oldugunu gorem icin getContextHandles() kullaniyoruz.
+        Thread.sleep(5000);
+        System.out.println(driver.getContext() +"<=======proceed butonuna bastiktan sonraki context - driver hala native de");
+
+        Set butunturler = driver.getContextHandles();
+        for (Object tur: butunturler) {
+            System.out.println(tur);
+            if (tur.toString().contains("WEBVIEW")) {
+                driver.context((String) tur);
+                Thread.sleep(10000);
+            }
+        }
+
+
+        System.out.println(driver.getContext() + " web view gectik");
+        Thread.sleep(5000);
+
+        // 6- Verify if user can do operations on Web view and navigate back to native app if needed.
+        // (go to google and search “appium” then navigate to NATIVE APP and verify it)
+        //Webview assertions
+        driver.findElement(By.xpath("//input[@name='q']")).sendKeys("appium"+ Keys.ENTER);
+        Thread.sleep(5000);
     }
 }

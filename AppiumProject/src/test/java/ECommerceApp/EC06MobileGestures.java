@@ -1,8 +1,12 @@
 package ECommerceApp;
 
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.touch.LongPressOptions;
+import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -11,8 +15,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Set;
 
-public class EC05TotalAmountValidationScroll {
+public class EC06MobileGestures {
     /*
     1- Fill the form details and verify Toast error messages displayed appropriately for wrong inputs
     2- Shop the items in the app by scrolling to specific Product and add to cart
@@ -105,7 +110,41 @@ public class EC05TotalAmountValidationScroll {
 
         Assert.assertEquals("iki urunun toplam fiyati ile sepetteki toplam fiyat ayni", totalPriceDouble, total);
 
-        driver.quit();
+        // term of conditons gormek icin long press yapilmali
+     MobileElement checkBox=driver.findElement(By.className("android.widget.CheckBox"));
+     MobileElement termsOfCondButton= driver.findElement(By.id("com.androidsample.generalstore:id/termsButton"));
+     MobileElement visitWebsiteButton= driver.findElement(By.id("com.androidsample.generalstore:id/btnProceed"));
+        TouchAction action=new TouchAction<>(driver);
+        //tab
+        action.tap(TapOptions.tapOptions().withElement(ElementOption.element(checkBox))).perform();
+        // long press
+        action.longPress(LongPressOptions.longPressOptions().withElement(ElementOption.element(termsOfCondButton))).release().perform();
+
+        //popup assert
+        MobileElement popUpTitle= driver.findElement(By.id("com.androidsample.generalstore:id/alertTitle"));
+        MobileElement closeButton= driver.findElement(By.id("android:id/button1"));
+        Assert.assertTrue(popUpTitle.isDisplayed());
+
+        //close button
+        action.tap(TapOptions.tapOptions().withElement(ElementOption.element(closeButton))).perform();
+
+        System.out.println(driver.getContext() + "<====visit website button tap etmeden once");
+        //visit website button
+        action.tap(TapOptions.tapOptions().withElement(ElementOption.element(visitWebsiteButton))).perform();
+
+        //burda aplikasyonun hangi turleri oldugunu gorem icin getContextHandles() kullaniyoruz.
+        Thread.sleep(5000);
+        Set<String> contextName = driver.getContextHandles();
+        for (String tur: contextName) {
+            System.out.println(tur);
+            Thread.sleep(3000);
+            if (tur.contains("WEBVIEW_chrome")) {
+                driver.context(tur);
+                Thread.sleep(3000);
+            }
+        }
+
+        System.out.println(driver.getContext() + "<====visit website button tap ettikten sonra");
 
     }
 }

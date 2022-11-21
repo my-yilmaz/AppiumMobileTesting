@@ -24,7 +24,7 @@ public class EC01Negative {
      */
 
     @Test
-    public void negatifTest() throws MalformedURLException, InterruptedException {
+    public void test01() throws MalformedURLException, InterruptedException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
