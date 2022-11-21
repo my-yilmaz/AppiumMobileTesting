@@ -10,11 +10,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
-
-public class EC04TotalAmountValidation {
-
-     /*
+public class EC05TotalAmountValidationScroll {
+    /*
     1- Fill the form details and verify Toast error messages displayed appropriately for wrong inputs
     2- Shop the items in the app by scrolling to specific Product and add to cart
     3- Validate if the items selected in the page 2 are matching with the items displayed in check out page
@@ -40,8 +39,8 @@ public class EC04TotalAmountValidation {
         Thread.sleep(4000);
         //ulke secilsin
         driver.findElement(By.id("com.androidsample.generalstore:id/spinnerCountry")).click();
-        driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Canada\"))");
-        driver.findElement(By.xpath("//android.widget.TextView[@text='Canada']")).click();
+        driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Belgium\"))");
+        driver.findElement(By.xpath("//android.widget.TextView[@text='Belgium']")).click();
         // isim girilsin
         driver.findElement(By.id("com.androidsample.generalstore:id/nameField")).sendKeys("Anna");
         //female secilsin
@@ -54,10 +53,16 @@ public class EC04TotalAmountValidation {
         //birinci urun sec
         driver.findElement(By.xpath("(//android.widget.TextView[@text='ADD TO CART'])[1]")).click();
         Thread.sleep(2000);
-        //ikinci urun sec not: ilk urunu secince ikinci urunun indexi 1 oldu.
-        driver.findElement(By.xpath("(//android.widget.TextView[@text='ADD TO CART'])[1]")).click();
-        Thread.sleep(3000);
-        //sepete tikla
+        //2. urune kadar scroll yapildi
+        driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().resourceId(\"com.androidsample.generalstore:id/rvProductList\")).scrollIntoView(text(\"Jordan Lift Off\"))");
+
+        List<MobileElement> urunler = driver.findElementsById("com.androidsample.generalstore:id/productName");
+        //urun adi uzerinden add to cart butonuna ulasiyoruz
+        for (int i = 0; i < urunler.size(); i++) {
+            if (urunler.get(i).getText().equals("Jordan Lift Off")) {
+                driver.findElementsById("com.androidsample.generalstore:id/productAddCart").get(i).click();
+            }
+        }
         driver.findElement(By.id("com.androidsample.generalstore:id/appbar_btn_cart")).click();
         Thread.sleep(2000);
 
@@ -68,31 +73,39 @@ public class EC04TotalAmountValidation {
         Assert.assertEquals(driver.findElementByXPath("//android.widget.TextView[@text='Air Jordan 4 Retro']").getText(), "Air Jordan 4 Retro");
 
         //ikinci urun adi = Air Jordan 1 Mid SE
-        Assert.assertEquals(driver.findElementByXPath("//android.widget.TextView[@text='Air Jordan 1 Mid SE']").getText(), "Air Jordan 1 Mid SE");
+        Assert.assertEquals(driver.findElementByXPath("//android.widget.TextView[@text='Jordan Lift Off']").getText(), "Jordan Lift Off");
         Thread.sleep(2000);
-        //sepeeteki iki urunun toplami ile genel toplami karsilastirma
 
-        MobileElement firstProductPrice = driver.findElementByXPath("(//android.widget.TextView[@resource-id='com.androidsample.generalstore:id/productPrice'])[1]");
-        MobileElement secondProductPrice = driver.findElementByXPath("(//android.widget.TextView[@resource-id='com.androidsample.generalstore:id/productPrice'])[2]");
+        //sepeeteki iki urunun toplami ile genel toplami karsilastirma
+        List<MobileElement> urunFiyatlari = driver.findElementsById("com.androidsample.generalstore:id/productPrice");
+        String firstProductPrice = urunFiyatlari.get(0).getText();
+        System.out.println("firstProductPrice = " + firstProductPrice); //$160.97
+        String secondProductPrice = urunFiyatlari.get(1).getText();
+        System.out.println("secondProductPrice = " + secondProductPrice); //$115.0
+
         //urunlerin fiyat toplamlari
-        String firstProduct = firstProductPrice.getText().substring(1);
-        String secondProduct = secondProductPrice.getText().substring(1);
+        String firstProduct = firstProductPrice.substring(1);
+        String secondProduct = secondProductPrice.substring(1);
         double firstDouble = Double.parseDouble(firstProduct);
-        System.out.println("birinci urunun fiyatı= " + firstDouble);
+        System.out.println("birinci urunun fiyati = " + firstDouble); //160.97
         double secondDouble = Double.parseDouble(secondProduct);
-        System.out.println("ikinci urunun fiyatı = " + secondDouble);
+        System.out.println("ikinci urunun fiyati, = " + secondDouble);//115.0
 
         String total = String.valueOf(firstDouble + secondDouble);
-        System.out.println("iki urunun toplam fiyatı = " + total);
+        System.out.println("iki urunun toplam fiyatı = " + total); //275.97
 
-        //spetteki toplam fiyat
+        //sepetteki toplam fiyat
         MobileElement totalPrice = driver.findElementById("com.androidsample.generalstore:id/totalAmountLbl");
         String totalActual = totalPrice.getText().substring(1);
 
         String totalPriceDouble = String.valueOf(Double.parseDouble(totalActual));
         System.out.println("Sepetteki iki urunun toplam fiyati = " + totalPriceDouble);
-        //iki total fiyatın aynı oldugunu dogrulama
+
+        //iki total fiyatin ayni oldugunu dogrulama
+
         Assert.assertEquals("iki urunun toplam fiyati ile sepetteki toplam fiyat ayni", totalPriceDouble, total);
+
         driver.quit();
+
     }
 }
