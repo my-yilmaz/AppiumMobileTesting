@@ -3,6 +3,8 @@ package ECommerceApp;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.touch.LongPressOptions;
 import io.appium.java_client.touch.TapOptions;
@@ -133,28 +135,44 @@ public class EC06WebApp {
         //visit website button
         Thread.sleep(2000);
         action.tap(TapOptions.tapOptions().withElement(ElementOption.element(visitWebsiteButton))).perform();
-        Thread.sleep(2000);
+
         //burda aplikasyonun hangi turleri oldugunu gorem icin getContextHandles() kullaniyoruz.
         Thread.sleep(5000);
         System.out.println(driver.getContext() +"<=======proceed butonuna bastiktan sonraki context - driver hala native de");
 
-        Set butunturler = driver.getContextHandles();
-        for (Object tur: butunturler) {
-            System.out.println(tur);
-            if (tur.toString().contains("WEBVIEW")) {
-                driver.context((String) tur);
-                Thread.sleep(10000);
-            }
-        }
-
-
-        System.out.println(driver.getContext() + " web view gectik");
-        Thread.sleep(5000);
-
         // 6- Verify if user can do operations on Web view and navigate back to native app if needed.
         // (go to google and search “appium” then navigate to NATIVE APP and verify it)
         //Webview assertions
-        driver.findElement(By.xpath("//input[@name='q']")).sendKeys("appium"+ Keys.ENTER);
+        Set<String> butunturler = driver.getContextHandles();
+        for (String tur: butunturler) {
+            System.out.println(tur);
+            if (tur.contains("WEBVIEW")) {
+                driver.context("WEBVIEW_chrome");
+            }
+        }
+
         Thread.sleep(5000);
+        System.out.println(driver.getContext() + " web view gectik");
+        Thread.sleep(5000);
+
+        driver.findElement(By.xpath("//input[@name='q']")).sendKeys("appium" + Keys.ENTER);
+
+        Thread.sleep(5000);
+        System.out.println(driver.getContext() + " web view deyiz");
+
+        Set<String> butunturler1 = driver.getContextHandles();
+        for (String tur: butunturler1) {
+            System.out.println(tur);
+            if (tur.contains("NATIVE")) {
+                driver.context(tur);
+            }
+        }
+
+        driver.pressKey(new KeyEvent().withKey(AndroidKey.BACK));
+
+        System.out.println(driver.getContext() + " native deyiz");
+        Thread.sleep(10000);
+        //close app
+        driver.closeApp();
     }
 }
