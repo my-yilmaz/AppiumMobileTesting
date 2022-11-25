@@ -117,8 +117,6 @@ public class IQ {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(carpimSonrasiSonuc,ex);
 
-
-
 //        String rounding=format("%.4f", carpimSonrasiSonuc);
         String rounding = carpimSonrasiSonuc.substring(1);
         String numericSonuc = rounding;
